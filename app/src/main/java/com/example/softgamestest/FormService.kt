@@ -6,11 +6,11 @@ object FormService {
     private const val SECONDS_IN_YEAR = 60 * 60 * 24 * 365
 
     fun makeFullName(firstName: String?, lastName: String?): String {
-        if (firstName?.isEmpty() == true && lastName?.isEmpty() == true) {
+        if (firstName?.isEmpty() != false && lastName?.isEmpty() != false) {
             return "Invalid first name and last name"
-        } else if (firstName?.isEmpty() == true) {
+        } else if (firstName?.isEmpty() != false) {
             return "Invalid first name"
-        } else if (lastName?.isEmpty() == true) {
+        } else if (lastName?.isEmpty() != false) {
             return "Invalid last name"
         }
 
@@ -19,10 +19,16 @@ object FormService {
 
     fun calculateUserAge(dateOfBirthday: Date?): String {
         if (dateOfBirthday == null) {
-            return "Invalid date of birthday"
+            return "Invalid date of birthday: please pick a date"
         }
 
-        val age = (Date().time - dateOfBirthday.time) / 1000 / SECONDS_IN_YEAR
+        val now = Date()
+
+        if (dateOfBirthday.after(now)) {
+            return "Invalid date of birthday: date can't be bigger than today's date"
+        }
+
+        val age = (now.time - dateOfBirthday.time) / 1000 / SECONDS_IN_YEAR
 
         return age.toString()
     }

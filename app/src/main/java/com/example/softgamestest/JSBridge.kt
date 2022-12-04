@@ -1,9 +1,11 @@
 package com.example.softgamestest
 
+import android.os.Handler
+import android.os.Looper
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 
-class JSBridge(private var webView: WebView) {
+class JSBridge(private var webView: WebView, private var pushProvider: (() -> Any)) {
 
     companion object {
         const val WEB_INTERFACE_NAME = "JSBridge"
@@ -28,6 +30,16 @@ class JSBridge(private var webView: WebView) {
                 webView.evaluateJavascript("javascript:setAge(\"$response\")", null)
             },
             5000,
+        )
+    }
+
+    @JavascriptInterface
+    fun showPush() {
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                pushProvider.invoke()
+            },
+            7000,
         )
     }
 }

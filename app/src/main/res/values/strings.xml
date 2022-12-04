@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SoftgamesTest</string>
+    <string name="push_title">Solitaire smash</string>
+    <string name="push_body">Play again to smash your top score</string>
 </resources>

@@ -9,6 +9,10 @@ function async() {
     document.getElementById("ageFragment").innerHTML = "Calculating..";
 }
 
+function showPush() {
+    JSBridge.showPush()
+}
+
 function setFullName(nameAndLastName) {
     document.getElementById("nameFragment").innerHTML = nameAndLastName;
 }
